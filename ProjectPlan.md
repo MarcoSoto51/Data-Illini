@@ -7,4 +7,7 @@ Our approach will have mutliple steps to follow. First, we will collect the two 
 ## DataSet
 ## Dataset 1: insuranceData Dataset
 Source: https://cran.r-project.org/web/packages/insuranceData/index.html
-
+Description: Our first dataset comes from insuranceData package. This package is available to access on the CRAn website and is normally used for insurance reasher and teaching. This dataset has information that is related to insuracne claims and risk factors. Some important variables describe vehicle characteristics, policy exposure, and other factors that might influence insurance claims. This dataset was organized in a table format, which makes it a lot easier to work with for easy analyze while using Python. 
+## Dataset 2: Fatality Analysis Reporting System (FARS)
+Source: https://www.nhtsa.gov/file-downloads?p=nhtsa/downloads/FARS/2023/National/
+Description:
