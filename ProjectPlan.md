@@ -4,15 +4,17 @@ The goal of our project is to study the factors that might affect car accidents 
 In this project, we are going to use two datasets. The first dataset was found from the insuranceData package. This package has datasets that are normally used for risk analysis and insurance. This dataset has important information about insurance claims and vehicle characteristics. The second dataset is from the Fatality Analysis Reporting System (FARS). This dataset was made by the National Highway Traffic Saftey Administration and has detailed information about fatal motor vehicle crashes in the United States of America. 
 
 Our approach will have mutliple steps to follow. First, we will collect the two datasets and look over how the data is organized. Second, we will explore the data and search for missing values or any other cleaning issues. Third, we will focus on variables related to vehicles and drivers to explore potential patterns in the data. Lastly, we will summarze our results using simple analysis and visualization. The goal of this project is to get a better understanding of how vehicle and driver characteristics relate to accident outcomes and insurance risk. 
-## DataSet
+## DataSets
 ## Dataset 1: insuranceData Dataset
 Source: https://cran.r-project.org/web/packages/insuranceData/index.html
 
-Description: Our first dataset comes from insuranceData package. This package is available to access on the CRAn website and is normally used for insurance reasher and teaching. This dataset has information that is related to insuracne claims and risk factors. Some important variables describe vehicle characteristics, policy exposure, and other factors that might influence insurance claims. This dataset was organized in a table format, which makes it a lot easier to work with for easy analyze while using Python. 
+Description: Our first dataset comes from insuranceData package. This package is available to access on the CRAN website and is normally used for insurance research and teaching. This dataset has information that is related to insurance claims and risk factors. Some important variables describe vehicle characteristics, policy exposure, and other factors that might influence insurance claims. This dataset was organized in a table format, which makes it a lot easier to work with for easy analysis while using Python.  
 ## Dataset 2: Fatality Analysis Reporting System (FARS)
 Source: https://www.nhtsa.gov/file-downloads?p=nhtsa/downloads/FARS/2023/National/
 
-Description:
+Description: Our second dataset comes from the Fatality Analysis Reporting System (FARS). This dataset was made by the National Highway Traffic Safety Administration and has detailed information about fatal motor vehicle crashes in the United States of America. This dataset has multiple tables that show different parts of each crash. The tables have information about things like the accident itself, the vehicles involved, and the people who were in the crash. In the project on main focus will be on the vehicle dataset, becasue it has information about vehicle characteristics and crash involvement. This dataset is in CSV format, which means it is also easier to work with and analyze with Python. 
+## Data Integration
+Even though these datasets are not from the same sources, they both have important information that is related to vehicles and drivers. They are both two pieces for one puzzle, the insurance dataset has information about insurance claims and vehicle characteristices, while the FARS has all of the crash data. By using these variables together, we can find possible patterns between vehicle characteristics, crash involvement, and insurance risk. 
 
 
 ## Team 
