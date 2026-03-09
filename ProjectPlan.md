@@ -29,7 +29,14 @@ Responsible: Marco
 Week 3 - Clean the Data: Clean the datasets by fixing any formatting issues and select the most useful variables for this project.
 Responsible: Ellen
 
+Week 4 - Integrate the Data: Work together to find out how the datasets relate and connect the information together for further analysis.
+Responsible: Ellen and Marco
 
+Week 5 - Analyze the Data: Create visualizations to show patterns related to vehicles, crashes, and insurance risk.
+Responsible: Marco and Ellen
+
+Week 6 - Finalize: Organize the GitHub repository and finish the documentation for the final project.
+Responsible: Marco and Ellen
 
 ## Team 
 *Marco Soto: Data Preprocessing and Integration*
