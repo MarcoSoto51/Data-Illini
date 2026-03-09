@@ -22,8 +22,12 @@ Even though these datasets are not from the same sources, they both have importa
 ## Timeline
 Week 1 - Data Collection: Collect the insuranceData and FARS datasets. We will also read the documentation to understand what variables are in each dataset.
 Responsible: Marco and Ellen
+
 Week 2 - Explore the Data: Look through the datasets to understand the variables and search for missing values or any other data problems. 
 Responsible: Marco
+
+Week 3 - Clean the Data: Clean the datasets by fixing any formatting issues and select the most useful variables for this project.
+Responsible: Ellen
 
 
 
