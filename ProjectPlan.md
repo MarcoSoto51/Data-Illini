@@ -1,22 +1,23 @@
 ## Overview
-The goal of this project is to analyze how legal representation and demographic factors influence insurance claim payout severity. Using the AutoBi and AutoClaims datasets from the CRAN insuranceData package, we explore patterns in claim amounts across different genders, ages, and attorney involvement. The project follows a structured workflow: first, we clean and preprocess the data, addressing missing values and outliers; next, we summarize claim patterns using aggregation and visualizations; finally, we model relationships between demographics, attorney involvement, and payout severity using Generalized Linear Models (GLMs). By systematically combining descriptive and inferential analysis, this project aims to provide insights into which factors are associated with higher or lower claim payouts, supporting more informed risk assessment in auto insurance.
+The overall goal of this project is to analyze factors contributing to fatal crashes in the United States in 2023 and identify patterns associated with crash severity. We aim to understand how driver characteristics, environmental conditions, vehicle types, and roadway features influence fatal crash outcomes. The planned approach involves integrating the FARS 2023 National Auxiliary dataset, which provides detailed crash-level information, with a complementary dataset containing vehicle or state-level traffic statistics. By linking these datasets via common identifiers such as crash ID, state, and vehicle type, we will perform descriptive and inferential analyses. The main steps include: 1) data cleaning and preprocessing, 2) exploratory data analysis to identify trends and correlations, 3) statistical modeling (e.g., logistic regression) to quantify risk factors for fatal crashes, and 4) visualization of key findings to support evidence-based insights. Ultimately, we aim to provide actionable recommendations for traffic safety interventions and predictive insights to identify high-risk scenarios.
 
 
 ## Research or Business Question(s)
-*Research Question:* "Does legal representation or demographic factors predict claim payout severity across claim types?"
+*Research Questions:* 
+- Which driver, vehicle, and environmental factors are most strongly associated with fatal crashes in 2023?
+- Can we predict the likelihood of a fatal crash given a combination of driver, vehicle, and environmental variables?
 
-The AutoBi dataset provides detailed information on reported losses, including policyholder age, gender, and attorney involvement, while AutoClaims contains paid claim amounts and associated vehicle information. We will first clean and standardize the demographic and claim variables to handle missing or inconsistent entries, and cap outliers to reduce distortion from extreme values. Aggregation and normalization by gender and attorney status will allow us to compare reported versus paid claims systematically. Statistical modeling, specifically Generalized Linear Models (GLMs) with a Gamma distribution and log link, will be applied to quantify the effects of demographic factors and attorney involvement on claim severity. Visualizations, including histograms, boxplots, and normalized bar charts, will further illustrate patterns and differences across claim types. Together, these analyses will provide evidence on whether demographic characteristics or legal representation significantly predict the severity of insurance claim payouts, enabling a clearer understanding of risk factors in insurance claims.
+This project seeks to answer several research questions. First, which driver, vehicle, and environmental factors are most strongly associated with fatal crashes in 2023? Second, how do fatal crash patterns vary across geographic regions, time of day, and road types? Third, what is the impact of seat belt use, alcohol, or other impairments on fatality outcomes? Finally, can we predict the likelihood of a fatal crash given a combination of driver, vehicle, and environmental variables? These questions aim to identify actionable insights that can improve traffic safety and guide policy interventions.
 
 
-## Datasets: insuranceData Dataset
-Source: https://cran.r-project.org/web/packages/insuranceData/index.html
+## Datasets: Fatality Analysis Reporting System (FARS) Auxiliary Datasets
+Source: https://www.nhtsa.gov/file-downloads?p=nhtsa/downloads/FARS/2023/National/
 
-Description: Both our datasets comes from insuranceData package. This package is available to access on the CRAN website and is normally used for insurance research and teaching. This data source has information that is related to insurance claims and risk factors. Some important variables describe vehicle characteristics, policy exposure, and other factors that might influence insurance claims. The two datasets we will be joining are the AutoBi and the AutoClaims datasets. 
-
-Aggregated comparison will be made by combining the two datasets. AutoBi has individual-level auto bodily injury claims with variables like attorney representation (ATTORNEY), claimant sex (CLMSEX), marital status, seatbelt use, claimant age (CLMAGE), and total loss (LOSS). AutoClaims adds state-level context with claim class and amount paid. They will be integrated conceptually by demographic attributes (gender, age) to build a combined severity model.  
+Description: Datasets detailed crash-level data including driver demographics, crash circumstances, vehicle types, and outcomes. The source provides three datasets: ACC_AUX, PER_AUX, and VEH_AUX. These three datasets provide information on the accident, persons involved, and vehicle information for crashes in 2023. Datasets will be joined using the ST_CASE key. This is a provided key to join the datasets for analysis.
+  
 
 ## Timeline
-Week 1 - Data Collection: Collect the insuranceData datasets. We will also read the documentation to understand what variables are in each dataset.
+Week 1 - Data Collection: Collect the FARS datasets. We will also read the documentation to understand what variables are in each dataset.
 Responsible: Marco and Ellen
 
 Week 2 - Explore the Data: Look through the datasets to understand the variables and search for missing values or any other data problems. 
@@ -36,7 +37,7 @@ Responsible: Marco and Ellen
 
 ## Team 
 *Marco Soto: Data Preprocessing and Integration*
-- Download, organize, and document the insurancerating datasets.
+- Download, organize, and document the FARS datasets.
 - Assess completeness, consistency, and quality issues and document all cleaning steps.
 - Design and implement methods to combine insurancerating variables.
 - Document integration schema, mapping between datasets, and any assumptions made during integration.
@@ -49,11 +50,9 @@ Responsible: Marco and Ellen
 
 ## Constraints
 
-Our analysis is limited to the AutoBi and AutoClaims datasets from the CRAN insuranceData package. These datasets only include policyholder demographics, attorney involvement, and claim amounts. Non-fatal accident information or other factors influencing claim severity, such as vehicle damage details, driving history, or environmental conditions, are not included. Additionally, the datasets may contain missing values or inconsistencies in gender or age fields, which requires cleaning and may reduce sample size. Outlier capping is used to mitigate extreme claim values, but this may slightly distort the impact of very high claims.
-
-Another limitation is that the data are cross-sectional and do not track multiple claims from the same policyholder over time. This prevents modeling longitudinal effects or repeated claim behavior. The datasets also lack geographic identifiers or other context that might influence claim severity, so conclusions are limited to patterns observable from the provided variables. Lastly, while GLMs can quantify relationships between attorney involvement, demographics, and payouts, other unobserved factors may influence claims, so results should be interpreted as indicative rather than causal.
+TThe project faces several limitations due to the nature of the FARS auxiliary datasets. Some variables may have missing or incomplete values, particularly for less frequently reported factors such as drug involvement or specific vehicle features. Differences in coding conventions across the three datasets may introduce challenges when merging and harmonizing data, especially for variables that appear in multiple files. Spatial granularity is often limited to the state or county level, which may prevent detailed local-level analysis. Temporal coverage is restricted to crashes that occurred in 2023, limiting the ability to analyze long-term trends. Additionally, the datasets rely on reported crash data, which may contain reporting errors or inconsistencies, and certain sensitive information is masked or unavailable due to privacy restrictions, limiting detailed demographic or location-specific analyses.
 
 
 ## Gaps
-While the AutoBi and AutoClaims datasets provide rich information on claims, demographics, and attorney involvement, there are several gaps. First, the datasets do not include policy-level details such as coverage limits, deductible amounts, or driving history, which could affect payout severity. Second, information on claim type or cause of loss is limited, restricting the ability to differentiate patterns across specific claim categories. Finally, external validation with real-world insurance or crash data is not included, which limits the generalizability of findings beyond these datasets.
+Several gaps remain that may require additional input or supplementary data. Exposure-related information, such as vehicle miles traveled or traffic volume for specific roadway types, is not fully captured in the auxiliary files, which limits risk-adjusted comparisons across locations or vehicle types. Some variables, such as driver distraction or precise roadway conditions, may be inconsistently reported or unavailable, reducing the granularity of causal analysis. Verification of variable coding across the three datasets is needed to ensure accurate integration and analysis. Finally, additional geospatial or temporal data could enhance the project’s ability to identify patterns at a more localized or time-specific level.
 
