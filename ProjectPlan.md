@@ -1,26 +1,22 @@
 ## Overview
-The goal of our project is to study the factors that might affect car accidents and insurance claims. Accidents can happen for many different reasons, and insurance companies try to understand that so they can estimate risk. By searching through the data about vehicles, drivers, and crashes, we can find patterns that might help explain why accidents happened and how they can relate to insurance claims.
+The goal of this project is to analyze how legal representation and demographic factors influence insurance claim payout severity. Using the AutoBi and AutoClaims datasets from the CRAN insuranceData package, we explore patterns in claim amounts across different genders, ages, and attorney involvement. The project follows a structured workflow: first, we clean and preprocess the data, addressing missing values and outliers; next, we summarize claim patterns using aggregation and visualizations; finally, we model relationships between demographics, attorney involvement, and payout severity using Generalized Linear Models (GLMs). By systematically combining descriptive and inferential analysis, this project aims to provide insights into which factors are associated with higher or lower claim payouts, supporting more informed risk assessment in auto insurance.
 
-In this project, we are going to use two datasets. The first dataset was found from the insuranceData package. This package has datasets that are normally used for risk analysis and insurance. This dataset has important information about insurance claims and vehicle characteristics. The second dataset is from the Fatality Analysis Reporting System (FARS). This dataset was made by the National Highway Traffic Saftey Administration and has detailed information about fatal motor vehicle crashes in the United States of America. 
 
-Our approach will have mutliple steps to follow. First, we will collect the two datasets and look over how the data is organized. Second, we will explore the data and search for missing values or any other cleaning issues. Third, we will focus on variables related to vehicles and drivers to explore potential patterns in the data. Lastly, we will summarze our results using simple analysis and visualization. The goal of this project is to get a better understanding of how vehicle and driver characteristics relate to accident outcomes and insurance risk. 
+## Research or Business Question(s)
+*Research Question:* "Does legal representation or demographic factors predict claim payout severity across claim types?"
 
-## Datasets
+The AutoBi dataset provides detailed information on reported losses, including policyholder age, gender, and attorney involvement, while AutoClaims contains paid claim amounts and associated vehicle information. We will first clean and standardize the demographic and claim variables to handle missing or inconsistent entries, and cap outliers to reduce distortion from extreme values. Aggregation and normalization by gender and attorney status will allow us to compare reported versus paid claims systematically. Statistical modeling, specifically Generalized Linear Models (GLMs) with a Gamma distribution and log link, will be applied to quantify the effects of demographic factors and attorney involvement on claim severity. Visualizations, including histograms, boxplots, and normalized bar charts, will further illustrate patterns and differences across claim types. Together, these analyses will provide evidence on whether demographic characteristics or legal representation significantly predict the severity of insurance claim payouts, enabling a clearer understanding of risk factors in insurance claims.
 
-## Dataset 1: insuranceData Dataset
+
+## Datasets: insuranceData Dataset
 Source: https://cran.r-project.org/web/packages/insuranceData/index.html
 
-Description: Our first dataset comes from insuranceData package. This package is available to access on the CRAN website and is normally used for insurance research and teaching. This dataset has information that is related to insurance claims and risk factors. Some important variables describe vehicle characteristics, policy exposure, and other factors that might influence insurance claims. This dataset was organized in a table format, which makes it a lot easier to work with for easy analysis while using Python.  
-## Dataset 2: Fatality Analysis Reporting System (FARS)
-Source: https://www.nhtsa.gov/file-downloads?p=nhtsa/downloads/FARS/2023/National/
+Description: Both our datasets comes from insuranceData package. This package is available to access on the CRAN website and is normally used for insurance research and teaching. This data source has information that is related to insurance claims and risk factors. Some important variables describe vehicle characteristics, policy exposure, and other factors that might influence insurance claims. The two datasets we will be joining are the AutoBi and the AutoClaims datasets. 
 
-Description: Our second dataset comes from the Fatality Analysis Reporting System (FARS). This dataset was made by the National Highway Traffic Safety Administration and has detailed information about fatal motor vehicle crashes in the United States of America. This dataset has multiple tables that show different parts of each crash. The tables have information about things like the accident itself, the vehicles involved, and the people who were in the crash. In the project on main focus will be on the vehicle dataset, becasue it has information about vehicle characteristics and crash involvement. This dataset is in CSV format, which means it is also easier to work with and analyze with Python. 
-
-## Data Integration
-Even though these datasets are not from the same sources, they both have important information that is related to vehicles and drivers. They are both two pieces from one puzzle; the insurance dataset has information about insurance claims and vehicle characteristics, while the FARS has all of the crash data. By using these variables together, we can find possible patterns between vehicle characteristics, crash involvement, and insurance risk.  
+Aggregated comparison will be made by combining the two datasets. AutoBi has individual-level auto bodily injury claims with variables like attorney representation (ATTORNEY), claimant sex (CLMSEX), marital status, seatbelt use, claimant age (CLMAGE), and total loss (LOSS). AutoClaims adds state-level context with claim class and amount paid. They will be integrated conceptually by demographic attributes (gender, age) to build a combined severity model.  
 
 ## Timeline
-Week 1 - Data Collection: Collect the insuranceData and FARS datasets. We will also read the documentation to understand what variables are in each dataset.
+Week 1 - Data Collection: Collect the insuranceData datasets. We will also read the documentation to understand what variables are in each dataset.
 Responsible: Marco and Ellen
 
 Week 2 - Explore the Data: Look through the datasets to understand the variables and search for missing values or any other data problems. 
@@ -40,9 +36,9 @@ Responsible: Marco and Ellen
 
 ## Team 
 *Marco Soto: Data Preprocessing and Integration*
-- Download, organize, and document the FARS crash dataset and insurancerating dataset.
+- Download, organize, and document the insurancerating datasets.
 - Assess completeness, consistency, and quality issues and document all cleaning steps.
-- Design and implement methods to combine FARS crash data with insurancerating variables.
+- Design and implement methods to combine insurancerating variables.
 - Document integration schema, mapping between datasets, and any assumptions made during integration.
 
 *Ellen Harris: Data Analysis and Reproducibility*
@@ -50,17 +46,14 @@ Responsible: Marco and Ellen
 - Generate visualizations and summarize numeric findings of integrated datasets
 - Create workflow scripts to ensure end-to-end reproducibility from data acquisition to final results.
 
-## Research or Business Question(s)
-*Research Question:* How can historical crash data (from the NHTSA FARS dataset) be integrated with insurance rating variables (from the insurancerating dataset) to improve predictive models for auto insurance risk and pricing?
-
-This project investigates how historical crash data from the NHTSA FARS dataset can be combined with insurance rating variables from the insurancerating dataset to improve predictive models for auto insurance risk. Specifically, we aim to identify the crash and policyholder factors that most strongly influence claim frequency and severity. The goal is to develop insights that can enhance insurance pricing accuracy and support more effective risk assessment strategies. For insurance pricing models, GLMs (Poisson, Negative Binomial, Tweedie) are standard in practice, while tree-based methods (Random Forest, GBM) can capture complex patterns from crash and rating data. Often, a combination of models is used: GLMs for interpretability and tree-based models for predictive power.
-
 
 ## Constraints
 
-Our analysis is constrained by several factors inherent in the datasets and the scope of the project. The FARS dataset captures only fatal crashes in the United States, which means non-fatal or minor incidents are not represented. Additionally, certain variables, such as alcohol involvement, seatbelt usage, or driver impairment, may be incomplete or inconsistently reported across states and years. The insurancerating dataset may also have missing entries for key variables like policyholder demographics, vehicle type, or coverage details, limiting the completeness and precision of any predictive models.
+Our analysis is limited to the AutoBi and AutoClaims datasets from the CRAN insuranceData package. These datasets only include policyholder demographics, attorney involvement, and claim amounts. Non-fatal accident information or other factors influencing claim severity, such as vehicle damage details, driving history, or environmental conditions, are not included. Additionally, the datasets may contain missing values or inconsistencies in gender or age fields, which requires cleaning and may reduce sample size. Outlier capping is used to mitigate extreme claim values, but this may slightly distort the impact of very high claims.
 
-Integrating these datasets poses additional challenges. There is no direct linkage between individual crash records in FARS and insurance policy records, so any analysis combining the datasets must rely on aggregated or proxy-level matching. Differences in coding schemes, data formats, and variable definitions further complicate the integration process. Large dataset sizes and the need for extensive preprocessing or feature engineering may introduce computational limitations, requiring careful planning and efficient workflow design to ensure reproducibility.
+Another limitation is that the data are cross-sectional and do not track multiple claims from the same policyholder over time. This prevents modeling longitudinal effects or repeated claim behavior. The datasets also lack geographic identifiers or other context that might influence claim severity, so conclusions are limited to patterns observable from the provided variables. Lastly, while GLMs can quantify relationships between attorney involvement, demographics, and payouts, other unobserved factors may influence claims, so results should be interpreted as indicative rather than causal.
 
-Finally, there are important ethical and legal considerations. Both datasets contain sensitive information about individuals, including demographic and vehicle data, which must be handled responsibly. Predictive modeling for insurance risk also raises potential ethical concerns, such as inadvertently introducing bias against certain demographic groups or regions. These limitations, along with temporal and geographic constraints, missing data, and modeling challenges, may affect the generalizability, accuracy, and fairness of our findings. Careful documentation and transparency in all data handling and analysis steps are critical to mitigating these risks.
+
+## Gaps
+While the AutoBi and AutoClaims datasets provide rich information on claims, demographics, and attorney involvement, there are several gaps. First, the datasets do not include policy-level details such as coverage limits, deductible amounts, or driving history, which could affect payout severity. Second, information on claim type or cause of loss is limited, restricting the ability to differentiate patterns across specific claim categories. Finally, external validation with real-world insurance or crash data is not included, which limits the generalizability of findings beyond these datasets.
 
