@@ -2,7 +2,9 @@
 
 
 ## Task Updates
-
+#### Data Collection
+For data collection, we have found three main FARS auxiliary datasets that we plan to use and reviews the source information connected to them. This let us understand what each dataset contains and how the will fit to one another. ACC_AUX provideds accident-level information, PER_AUX provideds information about peopla involved in crashes, and VEH_AUX provideds vehicle-level details. The related artifacts for this task is ProjectPlan.md and the FARS 2023 auxiliary data folder in our repository.
+#### Data Exploration
 
 ## Updated Timeline
 Our new updated timeline reflects the fact that our milestone is focused more on refining the scope of the project and improving the project plan then on coding. Collecting and reviewing the FARS dataset have been completed. We are currently reviewing documentation and identifying the useful variables that should be completed by the end of the week. Cleaning and preparing the selected variables is planned for next week. Integrating ACC_AUX, PER_AUX, and VEH_AUX using ST_CASE is also planned for next week. Performing analysis and creating visualizations is planned to be finished by April 29. Finally, our final documentation and repository organization is planned to be finished by May 1. This timeline may still shift slightly based on how difficult the cleaning and integration steps are, but it provides us with a clear outline for our project.
