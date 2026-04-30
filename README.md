@@ -59,11 +59,11 @@ Overall, these steps used for the integration process made it possible to combin
 ## Challenges
 
 ## Reproducing
-To reproduce our project would need to clone the GitHub repository to your own local machine. This project was done using Python 3 and requires the pandas library for data processing. Before trying to reproduce, double-check that you have Python installed and that pandas are available in your environment before trying to run any scripts. 
+To reproduce our project would need to clone the GitHub repository to your own local machine. This project was done using Python 3 and requires the pandas library for data processing. Before trying to reproduce, double-check that you have Python installed and that pandas are available in your environment before trying to run any scripts.
 
 All the input data that is needed for this project is included in the repository. The raw dataset, FARS2023NationalAuxiliaryCSV.zip, is easy to locate in the data/raw folder. In this file, you will find the ACC_AUX, PER_AUX, and VEH_AUX datasets, which were used throughout the project. There are no additional downloads needed since all the data is already provided in the correct location. After you have gathered the data in the data/raw folder, the workflow can be run using the scripts in the given scripts directory. For the easiest way to reproduce the full pipeline is to run the run_all.sh script, which executes all the needed steps from data cleaning and integration to analysis and visualization. You can do this by running this command: 
 ```
-run_all.sh
+bash scripts/run_all.sh
 ```
-yo
+Once the script is run, it will automatically install the required dependencies, verify the raw data files, run the cleaning and integration process using the scripts/integrate.py, and then will run the analysis and visualization script. The now cleaned and integrated data will be saved in the data/processed folder, and results from analysis will be saved in the results/figures and results/tables folders after you run the full workflow. Because all of our scripts, data, and outputs are included in the repository or created from the workflow, any user could follow the exact steps and be able to fully reproduce this project, starting from the raw data to the final results, without having to modify any code.  
 ## References
