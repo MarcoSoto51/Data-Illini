@@ -42,6 +42,8 @@ In addition to cleaning the datasets, another step had to happen to prepare the 
 All of these cleaning steps were done in a single Python script, which makes the process reproducible. That means that my steps could be done again if needed, and the results would remain the same. The cleaned datasets and summary files were saved in the data/processed folder so they could be used for in the next stage of our project.  
 
 Overall, every cleaning step directly addressed the specific problem that was found in the data. Cleaning column names fixed formatting problems, removing duplicates improved accuracy, fixing ST_CASE allowed for proper connection between the datasets, and grouping the data dealt with the structural differences. These important steps allow for the data to be more reliable and ready for integration and analysis. 
+## Data Integration
+
 ## Findings
 
 ## Future Work
