@@ -43,7 +43,15 @@ All of these cleaning steps were done in a single Python script, which makes the
 
 Overall, every cleaning step directly addressed the specific problem that was found in the data. Cleaning column names fixed formatting problems, removing duplicates improved accuracy, fixing ST_CASE allowed for proper connection between the datasets, and grouping the data dealt with the structural differences. These important steps allow for the data to be more reliable and ready for integration and analysis. 
 ## Data Integration
+After the datasets were cleaned, it was time to combine them into a single dataset that could be used for analysis. This project used three datasets: ACC_AUX, PER_AUX, and VEH_AUX. Even though these datasets are related, they are still structured differently, so they could not be straight-up merged without causing any errors. 
 
+The ACC_AUX dataset is at the crash level, and each row represents one crash. The PER_AUX dataset is at the person level, and the VEH_AUX dataset is at the vehicle level. This is important because it shows how a single crash can contain multiple rows in the person and vehicle datasets. If we were to try to merge directly, duplicates would be created for the crash records and have incorrect totals. To correct this problem, the PER_AUX and VEH_AUX were first grouped by the ST_CASE column. This allowed for the data to be summarized by counting exactly how many individuals took part in every crash. Once the grouping was finished, each crash had a single row in these summary datasets. This step allowed it to be possible to actually combine them correctly with the crash-level data.  
+
+The ST_CASE column was the key to connecting all three of the datasets. This column is a unique crash ID, so it was the correct way to link these datasets together. Next, the summarized person and vehicle datasets were merged with the ACC_AUX dataset using the ST_CASE. Then a left join was used so that all the crash records would still be there, even if there were not any matching rows in the other datasets. Once the merging was completed, any values that were missing in the person or vehicle count columns were substituted with zero. This ensured that for every crash, it had a valid value for the number of individuals and vehicles involved. 
+
+We were then left with the final results of this process, which was a single dataset where every row represents one crash. This dataset still had the original crash information, but also had the number of individuals and vehicles involved. This final dataset is saved as fars_integrated_crash_level.csv. 
+
+Overall, these steps used for the integration process made it possible to combine the three datasets with different structures into one clean dataset. Grouping all the data before merging stopped any duplication problems, and using ST_CASE made sure that all the records were linked correctly. This creates a dataset that is accurate and ready to use for analysis.  
 ## Findings
 
 ## Future Work
