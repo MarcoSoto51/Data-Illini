@@ -1,0 +1,97 @@
+# =============================================================================
+# Snakefile — FARS 2023 Fatal Crash Analysis
+# End-to-end workflow: integration/cleaning → analysis/visualization
+# =============================================================================
+
+
+# Raw input files (committed to the repository under data/raw/)
+RAW_INPUTS = [
+    "data/raw/FARS2023NationalCSV/ACC_AUX.CSV",
+    "data/raw/FARS2023NationalCSV/PER_AUX.CSV",
+    "data/raw/FARS2023NationalCSV/VEH_AUX.CSV",
+]
+
+# Intermediate outputs produced by integrate.py
+INTEGRATED_OUTPUTS = [
+    "data/processed/acc_aux_cleaned.csv",
+    "data/processed/per_aux_cleaned.csv",
+    "data/processed/veh_aux_cleaned.csv",
+    "data/processed/per_summary_by_st_case.csv",
+    "data/processed/veh_summary_by_st_case.csv",
+    "data/processed/fars_integrated_crash_level.csv",
+]
+
+# Final analysis outputs produced by DataAnalysis_Visualization.py
+FIGURE_NAMES = [
+    "fatality_distribution.png",
+    "geographic_patterns.png",
+    "time_patterns.png",
+    "road_environment.png",
+    "impairment.png",
+    "vulnerable_users.png",
+    "driver_age.png",
+    "correlation_heatmap.png",
+    "feature_importance.png",
+    "state_crashes.png",
+]
+FIGURES        = expand("results/figures/{name}", name=FIGURE_NAMES)
+LR_REPORT      = "results/tables/logistic_regression_report.txt"
+SUMMARY_STATS  = "results/tables/summary_statistics.csv"
+
+
+
+# Build
+
+rule all:
+    input:
+        INTEGRATED_OUTPUTS,
+        FIGURES,
+        LR_REPORT,
+        SUMMARY_STATS
+
+
+rule integrate:
+    """
+    Merge the three FARS auxiliary files (ACC_AUX, PER_AUX, VEH_AUX),
+    apply quality / cleaning operations, and write cleaned CSVs plus the
+    crash-level integrated dataset to data/processed/.
+    """
+    input:
+        RAW_INPUTS
+    output:
+        INTEGRATED_OUTPUTS
+    log:
+        "logs/integrate.log"
+    shell:
+        "python scripts/integrate.py > {log} 2>&1"
+
+
+rule analyze:
+    """
+    Load the integrated crash-level CSV, compute summary statistics,
+    produce all figures, fit the Random Forest and Logistic Regression
+    models, and save outputs to results/.
+    """
+    input:
+        "data/processed/fars_integrated_crash_level.csv"
+    output:
+        FIGURES,
+        LR_REPORT,
+        SUMMARY_STATS
+    log:
+        "logs/analyze.log"
+    shell:
+        "python scripts/DataAnalysis_Visualization.py "
+        "--data {input} > {log} 2>&1"
+
+
+rule clean:
+    """Remove all generated files so the pipeline can be re-run from scratch."""
+    shell:
+        """
+        rm -rf data/processed/
+        rm -rf results/figures/
+        rm -rf results/tables/
+        rm -rf logs/
+        echo "Cleaned all generated outputs."
+        """
