@@ -108,7 +108,12 @@ These three datasets are connected using the ST_CASE, which is the
 unique crash ID. This allows it to be possible to combine the datasets
 later. The raw data was stored as a zip file in the data/raw folder, and
 all the cleaned and processed files are saved in the data/processed
-folder. \## Data Quality At first glance, the raw dataset had multiple
+folder. 
+
+## Data Quality 
+
+At first glance, the raw dataset had multiple 
+
 issues that needed to be fixed before the data was usable. The first
 problem that was noticed was that the column names were not consistent.
 Multiple column names had an extra space or were formatted in a
@@ -175,8 +180,11 @@ trying to fix obvious problems. It also involves checking to make sure
 that the data is consistent, usable, and structured in a way that
 supports the overall purpose of this project. Taking the time to address
 these issues allowed me to make sure that the final dataset would be
-accurate, reliable, and ready for analysis. \## Data Cleaning To correct
-all the issues that were found in the raw datasets, several cleaning
+accurate, reliable, and ready for analysis. 
+
+## Data Cleaning 
+
+To correct all the issues that were found in the raw datasets, several cleaning
 steps were performed using a Python script. These steps were based on
 the problems I identified earlier in the data quality section, and they
 were necessary to make sure they could correctly be merged and used for
@@ -233,8 +241,11 @@ that was found in the data. Cleaning column names fixed formatting
 problems, removing duplicates improved accuracy, fixing ST_CASE allowed
 for proper connection between the datasets, and grouping the data dealt
 with the structural differences. These important steps allow for the
-data to be more reliable and ready for integration and analysis. \##
-Data Integration After the datasets were cleaned, it was time to combine
+data to be more reliable and ready for integration and analysis. 
+
+## Data Integration 
+
+After the datasets were cleaned, it was time to combine
 them into a single dataset that could be used for analysis. This project
 used three datasets: ACC_AUX, PER_AUX, and VEH_AUX. Even though these
 datasets are related, they are still structured differently, so they
@@ -517,7 +528,7 @@ findings required deliberate framing to avoid misleading conclusions.
 
 ## Reproducing
 
-To reproduce our project would need to clone the GitHub repository to
+To reproduce our project, first you would need to clone the GitHub repository to
 your own local machine. This project was done using Python 3 and
 requires the pandas library for data processing. Before trying to
 reproduce, double-check that you have Python installed and that pandas
