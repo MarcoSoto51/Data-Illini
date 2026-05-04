@@ -112,10 +112,8 @@ folder.
 
 ## Data Quality 
 
-At first glance, the raw dataset had multiple 
-
-issues that needed to be fixed before the data was usable. The first
-problem that was noticed was that the column names were not consistent.
+At first glance, the raw dataset had multiple issues that needed to be fixed before the data was usable. 
+The first problem that was noticed was that the column names were not consistent.
 Multiple column names had an extra space or were formatted in a
 different ways, which could create problems when trying to combine the
 datasets. If you do not have consistent column names, it becomes much
