@@ -598,7 +598,7 @@ def run_logistic_regression(df: pd.DataFrame) -> str:
         report,
         "\nOdds Ratios (standardized coefficients):",
         coef_df.to_string(index=False),
-        "\nInterpretation: Odds ratio > 1 → associated with HIGHER odds of multi-fatality crash.",
+        "\nInterpretation: Odds ratio > 1 -> associated with HIGHER odds of multi-fatality crash.",
         "=" * 65,
     ]
     return "\n".join(lines)
@@ -694,12 +694,12 @@ def main():
     print("[9/9] Logistic regression model...")
     lr_report = run_logistic_regression(df)
     lr_path = os.path.join(RESULTS_DIR, "logistic_regression_report.txt")
-    with open(lr_path, "w") as f:
+    with open(lr_path, 'w', encoding='utf-8') as f:
         f.write(lr_report)
     print(lr_report)
     print(f"  Saved {lr_path}")
 
-    print(f"\n✓ All outputs saved to {OUTPUT_DIR}/")
+    print(f"\n All outputs saved to {OUTPUT_DIR}/")
     print("  Figures:")
     for fn in sorted(os.listdir(FIGURES_DIR)):
         print(f"    {fn}")

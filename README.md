@@ -34,14 +34,13 @@ these, **2,641 crashes (7.0%)** involved multiple fatalities,
 representing the most severe outcomes and a key target for predictive
 modeling.
 
-Exploratory analysis revealed several notable patterns. Temporally, a
-majority of fatal crashes (**54.2%**) occurred at night, and **58.0%**
-occurred on weekends, consistent with prior research linking reduced
-visibility and increased recreational driving to elevated crash risk.
-Geographically, urban areas accounted for a larger share of crashes
-(22,516 vs. 15,064 in rural areas), though rural crashes are often
-associated with higher severity due to longer emergency response times
-and higher speeds.
+Exploratory analysis revealed several notable patterns. A majority of
+fatal crashes (**54.2%**) occurred at night, and **58.0%** occurred on
+weekends, consistent with prior research linking reduced visibility and
+increased recreational driving to elevated crash risk. Geographically,
+urban areas accounted for a larger share of crashes (22,516 vs. 15,064
+in rural areas), though rural crashes are often associated with higher
+severity due to longer emergency response times and higher speeds.
 
 Impairment factors were prominent across the dataset. Alcohol
 involvement was present in **8,019 crashes**, representing over half of
@@ -75,7 +74,7 @@ vehicle occupants.
 Taken together, these findings highlight speeding, alcohol, nighttime
 conditions, and roadway departures as priority targets for traffic
 safety intervention, while the predictive model demonstrates the
-feasibility of using crash-level features to identify high-risk
+feasibility of using crash-level features to identify high risk
 scenarios before or immediately after a crash occurs.
 
 ## Data Profile
@@ -86,39 +85,93 @@ to fatal traffic crashes in the United States, but each one looks at a
 different level of detail. Together, they will allow us to see a more
 complete picture of what occurs during a crash.
 
-The ACC_AUX dataset has information at the crash level. Each row is
-there to represent a single crash and has general details about the
-location and time of the crash. This dataset is critical because it
-serves as the base dataset for this project.
+The ACC_AUX file is a structured dataset that has information at the
+crash level. Each row is there to represent a single crash and has
+general details about the location and time of the crash. This dataset
+is critical because it serves as the base dataset for this project.
 
-The PER_AUX dataset contains information at the person level. Every row
-is there to represent a person involved in a crash, like the passenger
-or driver. Because in some cases multiple people can be involved in a
-crash, there are multiple rows that have the same ST_CASE value. This
-dataset gives us a better understanding of how many individuals were
-involved and provides more details about individuals in the crash.
+The PER_AUX file is a structured dataset that contains information at
+the person level. Every row is there to represent a person involved in a
+crash, like the passenger or driver. Because in some cases multiple
+people can be involved in a crash, there are multiple rows that have the
+same ST_CASE value. This dataset gives us a better understanding of how
+many individuals were involved and provides more details about
+individuals in the crash.
 
-The VEH_AUX dataset contains vehicle-level data. Each row represents a
-vehicle that was involved in a crash. This is similar to the person
-dataset because multiple vehicles can be a part of one crash. This
-dataset gives an additional layer of detail by showing us how many
-vehicles were involved.
+The VEH_AUX file is a structured dataset that contains vehicle-level
+data. Each row represents a vehicle that was involved in a crash. This
+is similar to the person dataset because multiple vehicles can be a part
+of one crash. This dataset gives an additional layer of detail by
+showing us how many vehicles were involved.
 
 These three datasets are connected using the ST_CASE, which is the
 unique crash ID. This allows it to be possible to combine the datasets
 later. The raw data was stored as a zip file in the data/raw folder, and
 all the cleaned and processed files are saved in the data/processed
-folder. 
+folder.
 
-## Data Quality 
+The FARS dataset is a publicly available federal dataset maintained by
+the National Highway Traffic Safety Administration and published under
+the U.S. Department of Transportation's open data policy. As a
+government-produced dataset funded by taxpayers and released for public
+research use, there are no licensing restrictions on its use for
+academic analysis. No data use agreement, institutional review board
+approval, or special access credentials were required to download or
+analyze the 2023 national files. However, the absence of formal legal
+restrictions does not eliminate the need for ethical consideration in
+how the data is used, interpreted, and communicated.
 
-At first glance, the raw dataset had multiple issues that needed to be fixed before the data was usable. 
-The first problem that was noticed was that the column names were not consistent.
-Multiple column names had an extra space or were formatted in a
-different ways, which could create problems when trying to combine the
-datasets. If you do not have consistent column names, it becomes much
-harder to match the same fields across datasets, which has the
-possibility of causing errors during the merge.
+Although FARS is a public dataset, it contains detailed records of real
+fatal crashes involving real people who died on U.S. roads. Each record
+corresponds to an actual fatality, and the dataset includes variables
+such as state, county, crash date and time, road type, and demographic
+attributes of the persons involved. While the dataset does not include
+direct identifiers such as names or social security numbers, the
+combination of geographic, time, and demographic variables could in
+principle allow a determined user to re-identify individuals involved in
+specific crashes, particularly in low population rural areas where a
+fatal crash on a specific date and road type may be uniquely
+identifiable through public records or news reporting.
+
+Crash data analysis carries a risk of stigmatizing particular groups if
+findings are reported without appropriate context. For example, findings
+that younger drivers (ages 15 to 24) or older drivers (65+) are
+disproportionately involved in fatal crashes could be used to support
+discriminatory licensing policies if presented without acknowledging the
+role of exposure, infrastructure design, and socioeconomic factors.
+Similarly, the strong association between alcohol involvement and fatal
+crashes reflects a well documented behavioral pattern, but framing this
+purely as an individual failing ignores systemic factors such as lack of
+public transit, inadequate enforcement, and the marketing practices of
+the alcohol industry. Throughout this project, care was taken to present
+findings descriptively and to note the limitations of attributing
+causality to any single variable.
+
+The FARS dataset is well suited to the research questions guiding this
+project. FARS provides complete national coverage without the sampling
+bias that would affect a survey-based dataset. The crash-level,
+person-level, and vehicle-level structure of the auxiliary files
+directly supports analysis of driver, vehicle, and environmental factors
+simultaneously, which is central to our research questions. The binary
+and categorical variables available in FARS, covering impairment, road
+type, time of day, geography, and crash type, map cleanly onto the
+predictive modeling framework used to address the question of whether
+fatality likelihood can be estimated from observable crash
+characteristics. The primary limitation is that FARS captures only
+crashes that resulted in at least one fatality, meaning it cannot be
+used to study the broader universe of non-fatal crashes or to estimate
+absolute crash risk without denominators such as vehicle miles traveled.
+
+## Data Quality
+
+At first glance, the raw dataset had multiple issues that needed to be
+fixed before the data was usable. The first problem that was noticed was
+that the column names were not consistent. Multiple column names had an
+extra space or were formatted in a different ways, which could create
+problems when trying to combine the datasets. If you do not have
+consistent column names, it becomes much harder to match the same fields
+across datasets, which has the possibility of causing errors during the
+merge.
 
 Another major problem was with the ST_CASE column. This was identified
 as the most important column because it is used to connect all three of
@@ -162,31 +215,27 @@ totals in the final dataset.
 Another issue was checking to make sure the data was usable after
 cleaning. Any type of issue, even small problems, like an extra space in
 column names or incorrect data types, could create errors in the code or
-lead to incorrect results. These little issues might not seem that
-important upon first look, but later on, they have the ability to create
-bigger problems in the overall process. Because of this is was extremely
-important to fully review the data and fix all these issues early on.
-Another need was to balance cleaning the data with keeping enough useful
-information. While some information needed to be removed, like rows with
-missing or invalid ST_CASE values, removing too much of the data could
-reduce the amount of information that would be used for analysis. This
-was important so we could only remove records that could not be used and
-keep as much useful data as possible.
+lead to incorrect results. Another need was to balance cleaning the data
+with keeping enough useful information. While some information needed to
+be removed, like rows with missing or invalid ST_CASE values, removing
+too much of the data could reduce the amount of information that would
+be used for analysis. This was important so we could only remove records
+that could not be used and keep as much useful data as possible.
 
-Overall, all these issues show that data quality is not just about
-trying to fix obvious problems. It also involves checking to make sure
-that the data is consistent, usable, and structured in a way that
-supports the overall purpose of this project. Taking the time to address
-these issues allowed me to make sure that the final dataset would be
-accurate, reliable, and ready for analysis. 
+All these issues show that data quality is not just about trying to fix
+obvious problems. It also involves checking to make sure that the data
+is consistent, usable, and structured in a way that supports the overall
+purpose of this project. Taking the time to address these issues allowed
+me to make sure that the final dataset would be accurate, reliable, and
+ready for analysis.
 
-## Data Cleaning 
+## Data Cleaning
 
-To correct all the issues that were found in the raw datasets, several cleaning
-steps were performed using a Python script. These steps were based on
-the problems I identified earlier in the data quality section, and they
-were necessary to make sure they could correctly be merged and used for
-later analysis.
+To correct all the issues that were found in the raw datasets, several
+cleaning steps were performed using a Python script. These steps were
+based on the problems identified earlier in the data quality section,
+and they were necessary to make sure they could correctly be merged and
+used for later analysis.
 
 The first step was to clean the column names. Many column names had an
 extra space or inconsistent formatting, which could create problems when
@@ -215,18 +264,17 @@ cleanly. Any rows that had invalid or missing ST_CASE values were also
 removed. Those rows would not be able to link to the other datasets, so
 keeping them would not be doing any benefit to the final dataset.
 
-In addition to cleaning the datasets, another step had to happen to
-prepare the data for merging. Since the PER_AUX and VEH_AUX datasets are
-at the person and vehicle levels, they have multiple rows for each
-crash. To deal with this, both of the datasets were grouped by the
-ST_CASE to gather a count of how many people and vehicles were involved
-in each crash. This made summary datasets that could be merged together
-with the crash-level dataset without making any duplicate rows. This was
-important because it dealt with the structural differences between the
-datasets. Without grouping and merging the datasets directly would have
-given results with repeated crash records and incorrect totals. Because
-we summarized the data first, the final dataset remained at the crash
-level while still having useful information about people and vehicles.
+Since the PER_AUX and VEH_AUX datasets are at the person and vehicle
+levels, they have multiple rows for each crash. To deal with this, both
+of the datasets were grouped by the ST_CASE to gather a count of how
+many people and vehicles were involved in each crash. This made summary
+datasets that could be merged together with the crash-level dataset
+without making any duplicate rows. This was important because it dealt
+with the structural differences between the datasets. Without grouping
+and merging the datasets directly would have given results with repeated
+crash records and incorrect totals. Because we summarized the data
+first, the final dataset remained at the crash level while still having
+useful information about people and vehicles.
 
 All of these cleaning steps were done in a single Python script, which
 makes the process reproducible. That means that my steps could be done
@@ -234,44 +282,31 @@ again if needed, and the results would remain the same. The cleaned
 datasets and summary files were saved in the data/processed folder so
 they could be used for in the next stage of our project.
 
-Overall, every cleaning step directly addressed the specific problem
-that was found in the data. Cleaning column names fixed formatting
-problems, removing duplicates improved accuracy, fixing ST_CASE allowed
-for proper connection between the datasets, and grouping the data dealt
-with the structural differences. These important steps allow for the
-data to be more reliable and ready for integration and analysis. 
+Every cleaning step directly addressed the specific problem that was
+found in the data. Cleaning column names fixed formatting problems,
+removing duplicates improved accuracy, fixing ST_CASE allowed for proper
+connection between the datasets, and grouping the data dealt with the
+structural differences. These important steps allow for the data to be
+more reliable and ready for integration and analysis.
 
-## Data Integration 
-
-After the datasets were cleaned, it was time to combine
-them into a single dataset that could be used for analysis. This project
-used three datasets: ACC_AUX, PER_AUX, and VEH_AUX. Even though these
-datasets are related, they are still structured differently, so they
-could not be straight-up merged without causing any errors.
-
-The ACC_AUX dataset is at the crash level, and each row represents one
-crash. The PER_AUX dataset is at the person level, and the VEH_AUX
-dataset is at the vehicle level. This is important because it shows how
-a single crash can contain multiple rows in the person and vehicle
-datasets. If we were to try to merge directly, duplicates would be
-created for the crash records and have incorrect totals. To correct this
-problem, the PER_AUX and VEH_AUX were first grouped by the ST_CASE
+After the datasets were cleaned, it was time to combine them into a
+single dataset that could be used for analysis. The ACC_AUX dataset is
+at the crash level, and each row represents one crash. The PER_AUX
+dataset is at the person level, and the VEH_AUX dataset is at the
+vehicle level.The PER_AUX and VEH_AUX were first grouped by the ST_CASE
 column. This allowed for the data to be summarized by counting exactly
 how many individuals took part in every crash. Once the grouping was
 finished, each crash had a single row in these summary datasets. This
 step allowed it to be possible to actually combine them correctly with
 the crash-level data.
 
-The ST_CASE column was the key to connecting all three of the datasets.
-This column is a unique crash ID, so it was the correct way to link
-these datasets together. Next, the summarized person and vehicle
-datasets were merged with the ACC_AUX dataset using the ST_CASE. Then a
-left join was used so that all the crash records would still be there,
-even if there were not any matching rows in the other datasets. Once the
-merging was completed, any values that were missing in the person or
-vehicle count columns were substituted with zero. This ensured that for
-every crash, it had a valid value for the number of individuals and
-vehicles involved.
+Next, the summarized person and vehicle datasets were merged with the
+ACC_AUX dataset using the ST_CASE. Then a left join was used so that all
+the crash records would still be there, even if there were not any
+matching rows in the other datasets. Once the merging was completed, any
+values that were missing in the person or vehicle count columns were
+substituted with zero. This ensured that for every crash, it had a valid
+value for the number of individuals and vehicles involved.
 
 We were then left with the final results of this process, which was a
 single dataset where every row represents one crash. This dataset still
@@ -279,18 +314,17 @@ had the original crash information, but also had the number of
 individuals and vehicles involved. This final dataset is saved as
 fars_integrated_crash_level.csv.
 
-Overall, these steps used for the integration process made it possible
-to combine the three datasets with different structures into one clean
-dataset. Grouping all the data before merging stopped any duplication
-problems, and using ST_CASE made sure that all the records were linked
-correctly. This creates a dataset that is accurate and ready to use for
-analysis.
+These steps used for the integration process made it possible to combine
+the three datasets with different structures into one clean dataset.
+Grouping all the data before merging stopped any duplication problems,
+and using ST_CASE made sure that all the records were linked correctly.
+This creates a dataset that is accurate and ready to use for analysis.
 
 ## Findings
 
 Findings Analysis of 37,769 fatal crashes and 41,025 total fatalities
 from the 2023 FARS dataset revealed consistent and interpretable
-patterns across temporal, geographic, behavioral, and demographic
+patterns across time, geographic, behavioral, and demographic
 dimensions.
 
 *Fatality Distribution:* The overwhelming majority of fatal crashes,
@@ -310,19 +344,19 @@ pattern driven by a combination of large population, high vehicle miles
 traveled, and road network scale. Together, these three states accounted
 for a disproportionate share of national fatalities.
 
-*Temporal Patterns:* More than half of all fatal crashes (54.5%)
-occurred at night, and 58.1% occurred during the extended weekend period
-(Friday 6 PM through Sunday 11:59 PM). This clustering underscores the
-role of reduced visibility, fatigue, and higher rates of alcohol use
-during off-hours in elevating crash risk.
+*Time Patterns:* More than half of all fatal crashes (54.5%) occurred at
+night, and 58.1% occurred during the extended weekend period (Friday 6
+PM through Sunday 11:59 PM). This clustering underscores the role of
+reduced visibility, fatigue, and higher rates of alcohol use during off
+hours in elevating crash risk.
 
 *Road Type and Environment:* Principal arterials were the most dangerous
 road class by count (11,318 crashes), followed by minor arterials
-(8,665) and major collectors (7,370). Interstates, despite their design
-for high-speed travel, accounted for 4,692 crashes. Notably, the vast
-majority of crashes, 28,023, occurred under clear weather conditions,
-reinforcing that adverse weather alone is not the primary driver of
-fatal outcomes; driver behavior and infrastructure play larger roles.
+(8,665) and major collectors (7,370). Interstates accounted for 4,692
+crashes. Notably, the vast majority of crashes, 28,023, occurred under
+clear weather conditions, reinforcing that adverse weather alone is not
+the primary driver of fatal outcomes as driver behavior and
+infrastructure play larger roles.
 
 *Impairment and Risky Behaviors:* Among crashes where BAC status was
 known, 55% involved alcohol, making it the most prevalent impairment
@@ -333,17 +367,17 @@ hit-and-run incidents (7.5%) were also notable, while wrong-way driving
 strongest predictors of multi-fatality outcomes in the regression model.
 
 *Vulnerable Road Users:* Pedestrians were involved in 7,323 fatal
-crashes, motorcyclists in 6,274, and pedalcyclists in 1,173. The
-area-type breakdown revealed a stark contrast: pedestrian crashes were
-far more concentrated in urban areas (\~27% of urban crashes), while
-motorcyclist and large truck involvement were more evenly distributed,
-with large trucks more prevalent in rural crashes (\~18%).
+crashes, motorcyclists in 6,274, and pedalcyclists in 1,173. This
+breakdown revealed pedestrian crashes were far more concentrated in
+urban areas (\~27% of urban crashes), while motorcyclist and large truck
+involvement were more evenly distributed, with large trucks more
+prevalent in rural crashes (\~18%).
 
 *Driver Age:* Older drivers (65+) were involved in the highest absolute
 count of fatal crashes (7,826, or 20.7%), and their crashes were heavily
 concentrated in daytime hours (\~32% of daytime crashes). Teen drivers
 (15-19) and young adults (21-24) showed elevated nighttime involvement
-rates relative to their daytime share, consistent with risk-taking
+rates relative to their daytime share, consistent with risk taking
 behavior and inexperience.
 
 *Predictive Modeling:* The Random Forest feature importance analysis
@@ -351,7 +385,7 @@ identified pedestrian involvement (0.149) and motorcycle involvement
 (0.094) as the top two features for predicting multi-fatality crashes,
 followed by speeding (0.068) and roadway departure (0.065). The model
 achieved an AUC of 0.674. The Logistic Regression model (AUC = 0.691)
-confirmed that wrong-way driving (OR = 1.21) and speeding (OR = 1.19)
+confirmed that wrong way driving (OR = 1.21) and speeding (OR = 1.19)
 were the strongest positive predictors of multi-fatality outcomes, while
 pedestrian (OR = 0.55) and motorcycle involvement (OR = 0.70) were
 negatively associated, reflecting that these crashes, though fatal,
@@ -368,12 +402,12 @@ This project provided several important methodological and substantive
 lessons about working with large-scale administrative crash data. The
 first and most time-consuming challenge was data integration. The three
 FARS auxiliary files (ACC_AUX, PER_AUX, and VEH_AUX) each capture
-different units of analysis: crashes, persons, and vehicles
-respectively. Merging these correctly required careful attention to key
-variables and aggregation logic, as a naive join would produce duplicate
-rows or misattribute person- and vehicle-level characteristics to the
-wrong crash. This reinforced the importance of understanding the
-granularity of each dataset before attempting any integration.
+different units of analysis: crashes, persons, and vehicles. Merging
+these correctly required careful attention to key variables and
+aggregation logic, as a naive join would produce duplicate rows or
+misjoin person- and vehicle-level characteristics to the wrong crash.
+This reinforced the importance of understanding each dataset before
+attempting any integration.
 
 A second lesson involved the handling of missing and unknown values.
 FARS uses coded values to distinguish between "unknown," "not reported,"
@@ -394,35 +428,25 @@ Regression achieved reasonable recall for multi-fatality crashes (0.73),
 it did so at the cost of very low precision (0.11), meaning the majority
 of its positive predictions were false positives. This tradeoff is
 inherent to imbalanced classification and should be addressed explicitly
-in future modeling efforts. Finally, this project underscored the
-difference between statistical association and causal inference. The
-odds ratios and feature importances identify variables correlated with
+in future modeling efforts. This project underscored the difference
+between statistical association and causal inference. The odds ratios
+and feature importances identify variables correlated with
 multi-fatality outcomes, but they cannot establish causation. For
 example, the negative association between pedestrian involvement and
 multi-fatality crashes does not mean pedestrians are a protective
-factor; it reflects a structural feature of crash typology.
+factor. It reflects a structural feature of crash types.
 
 *Future Work*
 
 Several directions could meaningfully extend and improve this analysis.
-The most immediate opportunity is improving the predictive models.
-Future work should experiment with resampling techniques such as SMOTE
-(Synthetic Minority Oversampling Technique) or cost-sensitive learning
-to better handle class imbalance. Gradient boosting models such as
-XGBoost or LightGBM may also outperform the Random Forest used here,
-particularly given their robustness to imbalanced data and their ability
-to capture nonlinear interactions among features. Model evaluation
-should move beyond AUC to include precision-recall curves, which are
-more informative when the positive class is rare.
-
-A second direction is expanding the feature set. The current model
-relies on a relatively small set of binary indicators derived from the
-FARS auxiliary files. Incorporating additional variables from the full
-FARS dataset, such as road surface condition, lighting condition,
-vehicle type, restraint use, and driver license status, could improve
-predictive performance and provide richer insight into crash severity.
-Weather data from external sources could also be merged at the crash
-level to better characterize environmental conditions.
+One direction is expanding the feature set. The current model relies on
+a relatively small set of binary indicators derived from the FARS
+auxiliary files. Incorporating additional variables from the full FARS
+dataset, such as road surface condition, lighting condition, vehicle
+type, restraint use, and driver license status, could improve predictive
+performance and provide richer insight into crash severity. Weather data
+from external sources could also be merged at the crash level to better
+characterize environmental conditions.
 
 Geographic modeling represents another promising extension. The current
 analysis treats geography as a categorical variable (state or NHTSA
@@ -434,7 +458,7 @@ region. Linking crash locations to road network attributes, such as
 speed limits, lane count, and median presence, would allow for
 infrastructure-level analysis that is currently missing.
 
-Longitudinal analysis is a fourth avenue for future work. The current
+Longitudinal analysis is another option for future work. The current
 project focuses exclusively on 2023 data, which limits the ability to
 assess trends over time. Extending the analysis to cover multiple years
 of FARS data would allow for examination of whether crash rates,
@@ -446,8 +470,8 @@ changes.
 
 Finally, future work should more explicitly engage with policy
 translation. The findings here, particularly around speeding, alcohol,
-nighttime driving, and vulnerable road users, align with
-well-established risk factors in the traffic safety literature. However,
+nighttime driving, and vulnerable road users, align with well
+established risk factors in the traffic safety literature. However,
 translating statistical findings into actionable recommendations
 requires engagement with the specific policy levers available to
 federal, state, and local agencies. Future analyses could incorporate
@@ -459,13 +483,13 @@ crashes are most likely and ensuring appropriate EMS resources are
 positioned nearby, represents one concrete application where this type
 of model could have real-world impact.
 
-In summary, this project established a solid analytical foundation using
-2023 FARS data, but the complexity of traffic crash causation means
-there is substantial room to deepen both the modeling and the
-interpretive work. Addressing class imbalance, expanding features,
-incorporating spatial structure, and situating findings within a
-longitudinal and policy-relevant framework would all meaningfully
-advance the goals of this research.
+This project established a solid analytical foundation using 2023 FARS
+data, but the complexity of traffic crash causation means there is
+substantial room to deepen both the modeling and the interpretive work.
+Addressing class imbalance, expanding features, incorporating spatial
+structure, and situating findings within a longitudinal and
+policy-relevant framework would all meaningfully advance the goals of
+this research.
 
 ## Challenges
 
@@ -474,20 +498,19 @@ challenge in this project was the integration of three separate FARS
 auxiliary files, each operating at a different unit of analysis. The
 ACC_AUX file records one row per crash, while PER_AUX records one row
 per person involved and VEH_AUX records one row per vehicle. Merging
-these files into a single analytical dataset required careful
-aggregation of person- and vehicle-level attributes up to the crash
-level before any join could be performed. For variables like driver age
-group, this meant creating binary flags that indicated whether any
-driver in the crash belonged to a given age category, rather than simply
-joining on a single value. Getting this logic right was iterative and
-required repeated validation checks to confirm that crash counts
-remained consistent across merges and that no duplicate rows were
-introduced.
+these files into a single dataset required careful aggregation of
+person- and vehicle-level attributes up to the crash level before any
+join could be performed. For variables like driver age group, this meant
+creating binary flags that indicated whether any driver in the crash
+belonged to a given age category, rather than simply joining on a single
+value. Getting this logic right was iterative and required repeated
+validation checks to confirm that crash counts remained consistent
+across merges and that no duplicate rows were introduced.
 
 *Handling Missing and Coded Unknown Values:* FARS data uses a complex
 coding scheme in which different numeric values distinguish between "not
 applicable," "unknown," and "not reported" for many variables. This
-distinction matters analytically: a crash with unknown BAC is
+distinction matters analytically as a crash with unknown BAC is
 fundamentally different from one where BAC was tested and found to be
 zero, but both could be coded as non-alcohol-involved if unknowns are
 not handled carefully. Deciding how to treat these cases required
@@ -502,14 +525,13 @@ multi-fatality crashes was complicated by the severe imbalance in the
 target variable: only 7% of crashes in the dataset involved multiple
 fatalities. Both models trained during this project, the Random Forest
 and the Logistic Regression, struggled with this imbalance in different
-ways. The Random Forest tended to under-predict the minority class,
+ways. The Random Forest tended to under predict the minority class,
 while the Logistic Regression achieved better recall at the cost of very
 poor precision. Selecting the right evaluation metric was itself a
 challenge, since overall accuracy is a misleading measure when one class
 dominates. Navigating these tradeoffs without the benefit of resampling
-techniques or cost-sensitive learning, which were outside the scope of
-this project, meant accepting meaningful limitations in model
-performance.
+techniques or cost-sensitive learning meant accepting meaningful
+limitations in model performance.
 
 *Interpreting Feature Directionality:* A recurring interpretive
 challenge was making sense of features that were negatively associated
@@ -519,35 +541,62 @@ involvement seems counterintuitive given that pedestrians are among the
 most vulnerable road users. Understanding that this reflects crash
 typology rather than a protective effect required careful reasoning
 about what the model was actually predicting and what the reference
-category implied. More broadly, distinguishing between statistical
-association and causal interpretation was a constant discipline
-throughout the analysis, and communicating these nuances clearly in the
-findings required deliberate framing to avoid misleading conclusions.
+category implied. Distinguishing between statistical association and
+causal interpretation was a constant discipline throughout the analysis,
+and communicating these nuances clearly in the findings required
+deliberate framing to avoid misleading conclusions.
 
 ## Reproducing
 
-To reproduce our project, you would first need to clone the GitHub repository to your own local machine. 
-This project was done using Python 3. Before trying to reproduce, double-check that you have Python installed on your local system
+To reproduce our project, you would first need to clone the GitHub
+repository to your own local machine. This project was done using Python
+3. Before trying to reproduce, double-check that you have the correct
+version of Python installed on your local system.
 
-All the input data that is needed for this project is included in the repository. 
-The raw dataset, FARS2023NationalAuxiliaryCSV.zip, is easy to locate in the data/raw folder. 
-In this file, you will find the ACC_AUX, PER_AUX, and VEH_AUX datasets, which were used throughout the project. 
-There are no additional downloads needed since all the data is already provided in the correct location. 
+All the input data that is needed for this project is included in the
+repository. The raw datasets, FARS2023NationalAuxiliaryCSV.zip, is easy
+to locate in the data/raw folder. In this file, you will find the
+ACC_AUX, PER_AUX, and VEH_AUX datasets, which were used throughout the
+project. There are no additional downloads needed since all the data is
+already provided in the correct location. Make sure you are in the
+project root directory for the steps below.
 
-Before trying to run the workflow, you must install the required dependencies by running: 
+Before trying to run the workflow, you must install the required
+dependencies by running:
 
 ```         
 pip install -r requirements.txt
 ```
 
-Once everything is set up, the workflow can be run by using the scripts in the given scripts directory. For the easiest way to reproduce the full pipeline is to run the run_all.sh script, which does all the needed steps for each part, like data cleaning, integration, analysis, and visualization. 
+The three FARS datasets are stored in a zip file. You can manually unzip
+them, or run the following command:
 
-You can complete this by running this command: 
+```         
+unzip data/raw/FARS2023NationalAuxiliaryCSV.zip -d data/raw/FARS2023NationalCSV
+```
+
+Once everything is set up, the workflow can be run by using the scripts
+in the given scripts directory. For the easiest way to reproduce the
+full pipeline is to run the run_all.sh script, which does all the needed
+steps for each part, like data cleaning, integration, analysis, and
+visualization.
+
+You can complete this by running this command:
 
 ```         
 bash scripts/run_all.sh 
 ```
-Once the script is run, it will automatically install the required dependencies, verify the raw data files, run the cleaning and integration process using the scripts/integrate.py, and then will run the analysis and visualization script. The cleaned and integrated data will be saved in the data/processed folder, and any analysis of outputs will be generated by the workflow. Because all of our scripts, data, and outputs are included in the repository or created from the workflow, any user could follow the exact steps and be able to fully reproduce this project, starting from the raw data to the final results, without having to modify any code. 
+
+Once the script is run, it will automatically install the required
+dependencies, verify the raw data files, run the cleaning and
+integration process using the scripts/integrate.py, and then will run
+the analysis and visualization script. The cleaned and integrated data
+will be saved in the data/processed folder, and any analysis of outputs
+will be generated by the workflow. Because all of our scripts, data, and
+outputs are included in the repository or created from the workflow, any
+user could follow the exact steps and be able to fully reproduce this
+project, starting from the raw data to the final results, without having
+to modify any code.
 
 ## References
 

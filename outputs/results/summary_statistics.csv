@@ -1,0 +1,25 @@
+Category,Metric,Value
+Overall,Total Fatal Crashes,37769.0
+Overall,Total Fatalities,41025.0
+Overall,Avg Fatalities per Crash,1.086
+Overall,Multi-Fatality Crashes,2641.0
+Overall,Multi-Fatality Rate (%),6.99
+Time,Nighttime Crashes,20451.0
+Time,Nighttime Rate (%),54.15
+Time,Weekend Crashes,21904.0
+Time,Weekend Rate (%),57.99
+Geography,Urban Crashes,22516.0
+Geography,Rural Crashes,15064.0
+Geography,Unknown Crashes,189.0
+Impairment,Alcohol-Involved Crashes,8019.0
+Impairment,Alcohol Rate (excl unkn %),54.96
+Impairment,Speeding Crashes,10657.0
+Impairment,Speeding Rate (%),28.22
+Impairment,Distracted Driving Crashes,3024.0
+Impairment,Drowsy Driving Crashes,568.0
+Vulnerable Users,Pedestrian Crashes,7323.0
+Vulnerable Users,Motorcyclist Crashes,6274.0
+Vulnerable Users,Pedalcyclist Crashes,1173.0
+Road Type,Intersection-Involved Crashes,9781.0
+Road Type,Interstate Crashes,4692.0
+Road Type,Roadway Departure Crashes,17542.0

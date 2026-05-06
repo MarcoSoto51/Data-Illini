@@ -1,0 +1,36 @@
+
+Original dataset shapes:
+ACC_AUX: (37769, 45)
+PER_AUX: (92768, 25)
+VEH_AUX: (58508, 20)
+
+ACC_AUX after basic cleaning:
+Shape: (37769, 45)
+Missing ST_CASE: 0
+
+PER_AUX after basic cleaning:
+Shape: (92768, 25)
+Missing ST_CASE: 0
+
+VEH_AUX after basic cleaning:
+Shape: (58508, 20)
+Missing ST_CASE: 0
+
+Summary shapes:
+PER summary: (37769, 2)
+VEH summary: (37769, 2)
+
+Integrated dataset shape:
+(37769, 47)
+
+First 5 rows:
+   YEAR  STATE  ST_CASE  ...  TRACT  PERSON_RECORD_COUNT  VEHICLE_RECORD_COUNT
+0  2023      1    10001  ...      1                    1                     1
+1  2023      1    10002  ...      1                    1                     1
+2  2023      1    10003  ...      1                    1                     1
+3  2023      1    10004  ...      1                    3                     1
+4  2023      1    10005  ...      1                    4                     1
+
+[5 rows x 47 columns]
+
+Saved files to data/processed/

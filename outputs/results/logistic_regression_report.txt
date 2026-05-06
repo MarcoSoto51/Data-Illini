@@ -1,0 +1,41 @@
+=================================================================
+LOGISTIC REGRESSION: Predicting Multi-Fatality Crashes
+=================================================================
+
+Target: FATALS >= 2  (2,641 of 37,769 crashes = 7.0%)
+
+ROC-AUC: 0.6914
+
+Classification Report:
+                 precision    recall  f1-score   support
+
+Single Fatality       0.96      0.56      0.71      7026
+ Multi-Fatality       0.11      0.73      0.19       528
+
+       accuracy                           0.58      7554
+      macro avg       0.54      0.64      0.45      7554
+   weighted avg       0.91      0.58      0.68      7554
+
+
+Odds Ratios (standardized coefficients):
+              Feature  Coefficient  Odds Ratio
+    Wrong-Way Driving     0.189809    1.209018
+             Speeding     0.171965    1.187636
+     Driver Age 15–19     0.116132    1.123144
+     Driver Age 21–24     0.091670    1.096003
+     Alcohol Involved     0.091186    1.095472
+ Large Truck Involved     0.078285    1.081431
+   Interstate Highway     0.065375    1.067560
+       Drowsy Driving     0.030670    1.031146
+       Driver Age 65+     0.018206    1.018373
+Intersection Involved     0.011812    1.011882
+   Distracted Driving     0.008876    1.008916
+             Rollover     0.007439    1.007467
+    Roadway Departure     0.003605    1.003612
+          Hit and Run    -0.122855    0.884392
+Pedalcyclist Involved    -0.294612    0.744820
+  Motorcycle Involved    -0.361131    0.696888
+  Pedestrian Involved    -0.604876    0.546142
+
+Interpretation: Odds ratio > 1 -> associated with HIGHER odds of multi-fatality crash.
+=================================================================

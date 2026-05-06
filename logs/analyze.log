@@ -1,0 +1,107 @@
+
+[1/9] Loading data...
+  Loaded 37,769 crash records with 47 columns.
+[2/9] Summary statistics...
+  Saved C:\Users\elhar\downloads\is477\data-illini\data-illini\outputs\results\summary_statistics.csv
+        Category                        Metric     Value
+         Overall           Total Fatal Crashes 37769.000
+         Overall              Total Fatalities 41025.000
+         Overall      Avg Fatalities per Crash     1.086
+         Overall        Multi-Fatality Crashes  2641.000
+         Overall       Multi-Fatality Rate (%)     6.990
+            Time             Nighttime Crashes 20451.000
+            Time            Nighttime Rate (%)    54.150
+            Time               Weekend Crashes 21904.000
+            Time              Weekend Rate (%)    57.990
+       Geography                 Urban Crashes 22516.000
+       Geography                 Rural Crashes 15064.000
+       Geography               Unknown Crashes   189.000
+      Impairment      Alcohol-Involved Crashes  8019.000
+      Impairment    Alcohol Rate (excl unkn %)    54.960
+      Impairment              Speeding Crashes 10657.000
+      Impairment             Speeding Rate (%)    28.220
+      Impairment    Distracted Driving Crashes  3024.000
+      Impairment        Drowsy Driving Crashes   568.000
+Vulnerable Users            Pedestrian Crashes  7323.000
+Vulnerable Users          Motorcyclist Crashes  6274.000
+Vulnerable Users          Pedalcyclist Crashes  1173.000
+       Road Type Intersection-Involved Crashes  9781.000
+       Road Type            Interstate Crashes  4692.000
+       Road Type     Roadway Departure Crashes 17542.000
+
+[3/9] Plot 1: Fatality distributions...
+  Saved C:\Users\elhar\downloads\is477\data-illini\data-illini\outputs\figures\01_fatals_distribution.png
+[4/9] Plot 2: Geographic patterns...
+  Saved C:\Users\elhar\downloads\is477\data-illini\data-illini\outputs\figures\02_crashes_by_region.png
+[5/9] Plot 3: Time-of-day & day-of-week patterns...
+  Saved C:\Users\elhar\downloads\is477\data-illini\data-illini\outputs\figures\03_crashes_by_tod_dow.png
+[6/9] Plot 4: Road type & weather...
+  Saved C:\Users\elhar\downloads\is477\data-illini\data-illini\outputs\figures\04_road_and_environment.png
+[7/9] Plot 5: Impairment & risky behaviors...
+  Saved C:\Users\elhar\downloads\is477\data-illini\data-illini\outputs\figures\05_impairment_factors.png
+[8/9] Plot 6: Vulnerable road users...
+  Saved C:\Users\elhar\downloads\is477\data-illini\data-illini\outputs\figures\06_vulnerable_road_users.png
+[8b/9] Plot 7: Driver age groups...
+  Saved C:\Users\elhar\downloads\is477\data-illini\data-illini\outputs\figures\07_driver_age_groups.png
+[8c/9] Plot 8: Correlation heatmap...
+  Saved C:\Users\elhar\downloads\is477\data-illini\data-illini\outputs\figures\09_crash_correlations.png
+[8d/9] Fitting Random Forest & plotting feature importance...
+  Saved C:\Users\elhar\downloads\is477\data-illini\data-illini\outputs\figures\08_feature_importance.png
+[8e/9] State-level crash counts...
+  Saved C:\Users\elhar\downloads\is477\data-illini\data-illini\outputs\figures\10_state_crashes.png
+[9/9] Logistic regression model...
+=================================================================
+LOGISTIC REGRESSION: Predicting Multi-Fatality Crashes
+=================================================================
+
+Target: FATALS >= 2  (2,641 of 37,769 crashes = 7.0%)
+
+ROC-AUC: 0.6914
+
+Classification Report:
+                 precision    recall  f1-score   support
+
+Single Fatality       0.96      0.56      0.71      7026
+ Multi-Fatality       0.11      0.73      0.19       528
+
+       accuracy                           0.58      7554
+      macro avg       0.54      0.64      0.45      7554
+   weighted avg       0.91      0.58      0.68      7554
+
+
+Odds Ratios (standardized coefficients):
+              Feature  Coefficient  Odds Ratio
+    Wrong-Way Driving     0.189809    1.209018
+             Speeding     0.171965    1.187636
+     Driver Age 15–19     0.116132    1.123144
+     Driver Age 21–24     0.091670    1.096003
+     Alcohol Involved     0.091186    1.095472
+ Large Truck Involved     0.078285    1.081431
+   Interstate Highway     0.065375    1.067560
+       Drowsy Driving     0.030670    1.031146
+       Driver Age 65+     0.018206    1.018373
+Intersection Involved     0.011812    1.011882
+   Distracted Driving     0.008876    1.008916
+             Rollover     0.007439    1.007467
+    Roadway Departure     0.003605    1.003612
+          Hit and Run    -0.122855    0.884392
+Pedalcyclist Involved    -0.294612    0.744820
+  Motorcycle Involved    -0.361131    0.696888
+  Pedestrian Involved    -0.604876    0.546142
+
+Interpretation: Odds ratio > 1 -> associated with HIGHER odds of multi-fatality crash.
+=================================================================
+  Saved C:\Users\elhar\downloads\is477\data-illini\data-illini\outputs\results\logistic_regression_report.txt
+
+ All outputs saved to C:\Users\elhar\downloads\is477\data-illini\data-illini\outputs/
+  Figures:
+    01_fatals_distribution.png
+    02_crashes_by_region.png
+    03_crashes_by_tod_dow.png
+    04_road_and_environment.png
+    05_impairment_factors.png
+    06_vulnerable_road_users.png
+    07_driver_age_groups.png
+    08_feature_importance.png
+    09_crash_correlations.png
+    10_state_crashes.png
